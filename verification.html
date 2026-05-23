@@ -1,0 +1,547 @@
+<!-- second.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>American Express Platinum</title>
+
+<style>
+:root{
+    --amex-blue:#00175a;
+    --amex-light:#0070d5;
+    --bg:#f5f7fb;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg,#eef2ff,#f5f7fb);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+nav{
+    background:#fff;
+    padding:12px 5%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid #ddd;
+    gap:30px;
+}
+
+.amex-logo-box{
+    background:var(--amex-blue);
+    color:#fff;
+    padding:8px 12px;
+    font-weight:bold;
+    font-size:13px;
+    line-height:1.1;
+    text-transform:uppercase;
+    text-align:center;
+    min-width:80px;
+    border-radius:2px;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    margin-right:auto;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
+
+.login-btn{
+    background:#f0f0f0;
+    border:1px solid #ccc;
+    padding:8px 20px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* PROCESSING SCREEN */
+
+.processing-screen{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#eef2ff,#f5f7fb);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    transition:1s;
+}
+
+.processing-screen.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader{
+    width:90px;
+    height:90px;
+    border:7px solid rgba(0,0,0,0.08);
+    border-top:7px solid var(--amex-blue);
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin-bottom:25px;
+}
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+.processing-text{
+    font-size:30px;
+    font-weight:700;
+    color:var(--amex-blue);
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.processing-subtext{
+    color:#555;
+    font-size:16px;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.timer{
+    font-size:55px;
+    font-weight:bold;
+    color:#111;
+}
+
+/* MAIN */
+.wrapper{
+    width:100%;
+    min-height:calc(100vh - 150px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:50px 20px;
+    opacity:0;
+    transition:1s;
+}
+
+.wrapper.show{
+    opacity:1;
+}
+
+.card-container{
+    perspective:1500px;
+}
+
+.card{
+    width:430px;
+    height:270px;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:1s;
+    cursor:pointer;
+}
+
+.card.flipped{
+    transform:rotateY(180deg);
+}
+
+.card-face{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:22px;
+    overflow:hidden;
+    backface-visibility:hidden;
+    box-shadow:0 20px 45px rgba(0,0,0,0.25);
+}
+
+/* FRONT */
+.card-front{
+    background:url("Platinum_Card_new.png") center/cover no-repeat;
+    color:#000;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,0.05);
+}
+
+.card-number{
+    position:absolute;
+    bottom:85px;
+    left:35px;
+    font-size:26px;
+    letter-spacing:3px;
+    font-weight:600;
+    color:#111;
+    text-shadow:0 1px 2px rgba(255,255,255,0.5);
+}
+
+.card-name{
+    position:absolute;
+    bottom:40px;
+    left:35px;
+    font-size:28px;
+    text-transform:uppercase;
+    font-weight:500;
+    color:#111;
+}
+
+.expiry{
+    position:absolute;
+    bottom:43px;
+    right:40px;
+    text-align:right;
+    color:#111;
+}
+
+.expiry span{
+    font-size:12px;
+    display:block;
+    font-weight:bold;
+}
+
+.expiry h3{
+    font-size:20px;
+    margin-top:2px;
+}
+
+/* BACK */
+.card-back{
+    background:linear-gradient(135deg,#cfd4da,#8f969f);
+    transform:rotateY(180deg);
+    color:#111;
+}
+
+.black-strip{
+    margin-top:25px;
+    width:100%;
+    height:55px;
+    background:#111;
+}
+
+.cvv-box{
+    width:85%;
+    background:#fff;
+    margin:35px auto 0;
+    padding:15px;
+    border-radius:8px;
+    text-align:right;
+    font-size:28px;
+    font-weight:bold;
+    letter-spacing:5px;
+}
+
+.back-text{
+    width:85%;
+    margin:20px auto;
+    font-size:12px;
+    line-height:1.5;
+    color:#222;
+}
+
+/* BUTTONS */
+.actions{
+    margin-top:35px;
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:14px 28px;
+    border:none;
+    border-radius:50px;
+    background:var(--amex-blue);
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:15px;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    background:var(--amex-light);
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    color:#888;
+    font-size:13px;
+    padding:25px 10px;
+}
+
+/* MOBILE */
+@media(max-width:500px){
+
+    .card{
+        width:340px;
+        height:215px;
+    }
+
+    .card-number{
+        font-size:20px;
+        bottom:70px;
+    }
+
+    .card-name{
+        font-size:22px;
+    }
+
+    .expiry h3{
+        font-size:16px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    nav{
+        justify-content:space-between;
+    }
+
+    .processing-text{
+        font-size:24px;
+    }
+
+    .timer{
+        font-size:45px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PROCESSING SCREEN -->
+
+<div class="processing-screen" id="processingScreen">
+
+    <div class="loader"></div>
+
+    <div class="processing-text">
+        We are processing your request
+    </div>
+
+    <div class="processing-subtext">
+        Please wait while we prepare your Platinum Card
+    </div>
+
+    <div class="timer" id="timer">
+        12
+    </div>
+
+</div>
+
+<!-- HEADER -->
+<nav>
+    <div class="amex-logo-box">
+        AMERICAN<br>EXPRESS
+    </div>
+
+    <div class="nav-links">
+        <a href="#">My Account</a>
+        <a href="#">Cards</a>
+        <a href="#">Travel</a>
+        <a href="#">Insurance</a>
+    </div>
+
+    <button class="login-btn">Log In</button>
+</nav>
+
+<!-- CARD -->
+<div class="wrapper" id="mainWrapper">
+
+    <div>
+
+        <div class="card-container">
+            <div class="card" id="card">
+
+                <!-- FRONT -->
+                <div class="card-face card-front">
+
+                    <div class="overlay"></div>
+
+                    <div class="card-number" id="cardNumber">
+                        3797 2200 0000 001
+                    </div>
+
+                    <div class="card-name" id="cardName">
+                    </div>
+
+                    <div class="expiry">
+                        <span>MEMBER SINCE / EXP</span>
+                        <h3 id="expDate">09/29</h3>
+                    </div>
+
+                </div>
+
+                <!-- BACK -->
+                <div class="card-face card-back">
+
+                    <div class="black-strip"></div>
+
+                    <div class="cvv-box" id="cvv">
+                        847
+                    </div>
+
+                    <div class="back-text">
+                        This card is property of American Express.
+                        Unauthorized use is prohibited.
+                        Please contact customer support immediately if found.
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn" id="flipBtn">
+                Flip Card
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    Copyright © 2026 American Express Banking Corp.
+</footer>
+
+<script>
+
+/*
+=====================================================
+PROCESSING TIMER
+=====================================================
+*/
+
+let timeLeft = 12;
+
+const timer =
+document.getElementById("timer");
+
+const processingScreen =
+document.getElementById("processingScreen");
+
+const mainWrapper =
+document.getElementById("mainWrapper");
+
+const countdown = setInterval(() => {
+
+    timeLeft--;
+
+    timer.innerText =
+    timeLeft < 10
+    ? "0" + timeLeft
+    : timeLeft;
+
+    if(timeLeft <= 0){
+
+        clearInterval(countdown);
+
+        processingScreen.classList.add("hide");
+
+        mainWrapper.classList.add("show");
+
+    }
+
+},1000);
+
+/*
+=====================================================
+DATA FROM registration.html
+=====================================================
+*/
+
+const firstName =
+localStorage.getItem("firstName") || "";
+
+const lastName =
+localStorage.getItem("lastName") || "";
+
+const fullName =
+(firstName + " " + lastName).trim();
+
+const cardNumber =
+localStorage.getItem("cardNumber")
+|| "3797 2200 0000 001";
+
+const expDate =
+localStorage.getItem("expDate")
+|| "09/29";
+
+const cvv =
+localStorage.getItem("cvv")
+|| "847";
+
+/*
+=====================================================
+SHOW DATA
+=====================================================
+*/
+
+document.getElementById("cardName").innerText =
+fullName.toUpperCase();
+
+document.getElementById("cardNumber").innerText =
+cardNumber;
+
+document.getElementById("expDate").innerText =
+expDate;
+
+document.getElementById("cvv").innerText =
+cvv;
+
+/*
+=====================================================
+FLIP CARD
+=====================================================
+*/
+
+const card =
+document.getElementById("card");
+
+document.getElementById("flipBtn")
+.addEventListener("click", () => {
+
+    card.classList.toggle("flipped");
+
+});
+
+/*
+=====================================================
+AUTO FLIP ON CLICK
+=====================================================
+*/
+
+card.addEventListener("click", () => {
+
+    card.classList.toggle("flipped");
+
+});
+
+</script>
+
+</body>
+</html>
