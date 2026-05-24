@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>American Express Platinum</title>
 
@@ -20,11 +20,20 @@
     box-sizing:border-box;
 }
 
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
 body{
     font-family:Arial, Helvetica, sans-serif;
     background:
     radial-gradient(circle at top,#ffffff,#eef2ff 45%,#dde7ff);
-    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+
     overflow-x:hidden;
 }
 
@@ -34,26 +43,33 @@ nav{
     width:100%;
     background:#fff;
     border-bottom:1px solid #ddd;
+
     padding:14px 5%;
+
     display:flex;
     align-items:center;
     gap:30px;
+
+    flex-wrap:wrap;
 }
 
 .amex-logo-box{
-
-    /* ORIGINAL DARK BLUE */
-
     background:#00175a;
-
     color:#fff;
+
     padding:8px 12px;
+
     font-size:13px;
     font-weight:700;
+
     line-height:1.1;
+
     border-radius:2px;
+
     text-align:center;
+
     min-width:85px;
+
     letter-spacing:1px;
 }
 
@@ -73,9 +89,13 @@ nav{
 .login-btn{
     border:1px solid #ccc;
     background:#f7f7f7;
+
     padding:10px 22px;
+
     cursor:pointer;
+
     font-weight:bold;
+
     border-radius:5px;
 }
 
@@ -84,13 +104,17 @@ nav{
 .processing-screen{
     position:fixed;
     inset:0;
+
     z-index:99999;
+
     background:
     linear-gradient(135deg,#f5f8ff,#edf2ff);
+
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
+
     transition:1s;
 }
 
@@ -102,10 +126,15 @@ nav{
 .loader{
     width:95px;
     height:95px;
+
     border-radius:50%;
+
     border:7px solid rgba(0,0,0,0.08);
+
     border-top:7px solid var(--amex-blue);
+
     animation:spin 1s linear infinite;
+
     margin-bottom:30px;
 }
 
@@ -118,15 +147,20 @@ nav{
 .processing-text{
     font-size:32px;
     color:var(--amex-blue);
+
     font-weight:700;
+
     margin-bottom:14px;
+
     text-align:center;
 }
 
 .processing-subtext{
     font-size:16px;
     color:#555;
+
     margin-bottom:24px;
+
     text-align:center;
 }
 
@@ -139,13 +173,18 @@ nav{
 /* MAIN */
 
 .wrapper{
+    flex:1;
+
     width:100%;
-    min-height:calc(100vh - 90px);
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:60px 20px;
+
     opacity:0;
+
     transition:1s;
 }
 
@@ -154,7 +193,7 @@ nav{
 }
 
 .card-container{
-    perspective:2500px;
+    perspective:2200px;
 }
 
 /* CARD */
@@ -162,9 +201,13 @@ nav{
 .card{
     width:430px;
     height:270px;
+
     position:relative;
+
     transform-style:preserve-3d;
-    transition:transform 1.3s cubic-bezier(.4,.2,.2,1);
+
+    transition:transform 1.2s ease-in-out;
+
     cursor:pointer;
 
     animation:
@@ -172,30 +215,24 @@ nav{
     shadowPulse 4s ease-in-out infinite;
 }
 
-/* FLOATING */
+/* FLOAT */
 
 @keyframes floatCard{
 
     0%{
-        transform:
-        translateY(0px)
-        rotateX(0deg);
+        translate:0 0;
     }
 
     50%{
-        transform:
-        translateY(-10px)
-        rotateX(2deg);
+        translate:0 -10px;
     }
 
     100%{
-        transform:
-        translateY(0px)
-        rotateX(0deg);
+        translate:0 0;
     }
 }
 
-/* REAL SHADOW */
+/* SHADOW */
 
 @keyframes shadowPulse{
 
@@ -212,13 +249,22 @@ nav{
     }
 }
 
+.card.flipped{
+    transform:rotateY(180deg);
+}
+
 .card-face{
     position:absolute;
+
     width:100%;
     height:100%;
+
     border-radius:24px;
+
     overflow:hidden;
+
     backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
 
     box-shadow:
     0 20px 45px rgba(0,0,0,0.22);
@@ -232,27 +278,16 @@ nav{
     center/cover no-repeat;
 }
 
-/* GLASS OVERLAY */
-
-.overlay{
-    position:absolute;
-    inset:0;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,0.16),
-        rgba(255,255,255,0.03)
-    );
-}
-
-/* SHINE EFFECT */
+/* SHINE */
 
 .card-front::before{
     content:"";
+
     position:absolute;
+
     top:-180%;
     left:-50%;
+
     width:60%;
     height:380%;
 
@@ -280,13 +315,27 @@ nav{
     }
 }
 
+.overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,0.16),
+        rgba(255,255,255,0.03)
+    );
+}
+
 .card-number{
     position:absolute;
+
     bottom:86px;
     left:35px;
 
     font-size:26px;
     letter-spacing:3px;
+
     font-weight:600;
 
     color:#111;
@@ -297,11 +346,13 @@ nav{
 
 .card-name{
     position:absolute;
+
     bottom:42px;
     left:35px;
 
     font-size:28px;
     font-weight:500;
+
     text-transform:uppercase;
 
     color:#111;
@@ -309,16 +360,19 @@ nav{
 
 .expiry{
     position:absolute;
+
     right:40px;
     bottom:45px;
 
     text-align:right;
+
     color:#111;
 }
 
 .expiry span{
     font-size:11px;
     font-weight:bold;
+
     display:block;
 }
 
@@ -343,13 +397,16 @@ nav{
 
 .black-strip{
     margin-top:25px;
+
     width:100%;
     height:55px;
+
     background:#111;
 }
 
 .cvv-box{
     width:85%;
+
     background:#fff;
 
     margin:35px auto 0;
@@ -362,23 +419,27 @@ nav{
 
     font-size:28px;
     font-weight:bold;
+
     letter-spacing:5px;
 }
 
 .back-text{
     width:85%;
+
     margin:18px auto;
 
     font-size:12px;
+
     line-height:1.5;
 
     color:#222;
 }
 
-/* ACTION */
+/* BUTTON */
 
 .actions{
     margin-top:38px;
+
     display:flex;
     justify-content:center;
 }
@@ -397,6 +458,7 @@ nav{
     );
 
     color:#fff;
+
     font-size:15px;
     font-weight:bold;
 
@@ -425,15 +487,30 @@ nav{
 /* FOOTER */
 
 footer{
+    width:100%;
+
     text-align:center;
-    padding:22px 10px;
+
+    padding:24px 15px;
+
     color:#888;
+
     font-size:13px;
+
+    margin-top:auto;
 }
 
 /* MOBILE */
 
 @media(max-width:500px){
+
+    nav{
+        justify-content:space-between;
+    }
+
+    .nav-links{
+        display:none;
+    }
 
     .card{
         width:340px;
@@ -453,20 +530,17 @@ footer{
         font-size:16px;
     }
 
-    .nav-links{
-        display:none;
-    }
-
-    nav{
-        justify-content:space-between;
-    }
-
     .processing-text{
         font-size:24px;
     }
 
     .timer{
         font-size:46px;
+    }
+
+    footer{
+        font-size:12px;
+        padding-bottom:30px;
     }
 }
 
@@ -475,7 +549,7 @@ footer{
 
 <body>
 
-<!-- PROCESSING SCREEN -->
+<!-- PROCESSING -->
 
 <div class="processing-screen" id="processingScreen">
 
@@ -536,7 +610,8 @@ footer{
                         3797 2200 0000 001
                     </div>
 
-                    <div class="card-name" id="cardName"></div>
+                    <div class="card-name" id="cardName">
+                    </div>
 
                     <div class="expiry">
                         <span>MEMBER SINCE / EXP</span>
@@ -594,9 +669,9 @@ footer{
 <script>
 
 /*
-=====================================================
+===========================================
 PROCESSING TIMER
-=====================================================
+===========================================
 */
 
 let timeLeft = 12;
@@ -612,8 +687,6 @@ document.getElementById("mainWrapper");
 
 const card =
 document.getElementById("card");
-
-let flipped = false;
 
 const countdown = setInterval(() => {
 
@@ -633,22 +706,20 @@ const countdown = setInterval(() => {
         mainWrapper.classList.add("show");
 
         /*
-        ============================================
-        AUTO ONE TIME FLIP
-        ============================================
+        ===========================================
+        AUTO FLIP ONCE
+        ===========================================
         */
 
         setTimeout(() => {
 
-            card.style.transform =
-            "rotateY(180deg)";
+            card.classList.add("flipped");
 
         },1000);
 
         setTimeout(() => {
 
-            card.style.transform =
-            "rotateY(0deg)";
+            card.classList.remove("flipped");
 
         },3200);
 
@@ -657,9 +728,9 @@ const countdown = setInterval(() => {
 },1000);
 
 /*
-=====================================================
+===========================================
 GET DATA
-=====================================================
+===========================================
 */
 
 const firstName =
@@ -684,9 +755,9 @@ localStorage.getItem("cvv")
 || "847";
 
 /*
-=====================================================
+===========================================
 SHOW DATA
-=====================================================
+===========================================
 */
 
 document.getElementById("cardName").innerText =
@@ -702,25 +773,14 @@ document.getElementById("cvv").innerText =
 cvv;
 
 /*
-=====================================================
-MANUAL CLICK / MOBILE TAP FLIP
-=====================================================
+===========================================
+CLICK / MOBILE TAP FLIP
+===========================================
 */
 
 card.addEventListener("click", () => {
 
-    flipped = !flipped;
-
-    if(flipped){
-
-        card.style.transform =
-        "rotateY(180deg)";
-
-    }else{
-
-        card.style.transform =
-        "rotateY(0deg)";
-    }
+    card.classList.toggle("flipped");
 
 });
 
