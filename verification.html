@@ -28,6 +28,7 @@ body{
 
 body{
     font-family:Arial, Helvetica, sans-serif;
+
     background:
     radial-gradient(circle at top,#ffffff,#eef2ff 45%,#dde7ff);
 
@@ -41,13 +42,16 @@ body{
 
 nav{
     width:100%;
+
     background:#fff;
+
     border-bottom:1px solid #ddd;
 
     padding:14px 5%;
 
     display:flex;
     align-items:center;
+
     gap:30px;
 
     flex-wrap:wrap;
@@ -55,6 +59,7 @@ nav{
 
 .amex-logo-box{
     background:#00175a;
+
     color:#fff;
 
     padding:8px 12px;
@@ -76,18 +81,22 @@ nav{
 .nav-links{
     display:flex;
     gap:25px;
+
     margin-right:auto;
 }
 
 .nav-links a{
     text-decoration:none;
+
     color:#222;
+
     font-size:15px;
     font-weight:500;
 }
 
 .login-btn{
     border:1px solid #ccc;
+
     background:#f7f7f7;
 
     padding:10px 22px;
@@ -146,6 +155,7 @@ nav{
 
 .processing-text{
     font-size:32px;
+
     color:var(--amex-blue);
 
     font-weight:700;
@@ -157,6 +167,7 @@ nav{
 
 .processing-subtext{
     font-size:16px;
+
     color:#555;
 
     margin-bottom:24px;
@@ -166,7 +177,9 @@ nav{
 
 .timer{
     font-size:58px;
+
     font-weight:bold;
+
     color:#111;
 }
 
@@ -192,11 +205,11 @@ nav{
     opacity:1;
 }
 
+/* CARD */
+
 .card-container{
     perspective:2200px;
 }
-
-/* CARD */
 
 .card{
     width:430px;
@@ -205,6 +218,7 @@ nav{
     position:relative;
 
     transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
 
     transition:transform 1.2s ease-in-out;
 
@@ -249,15 +263,22 @@ nav{
     }
 }
 
+/* FLIP */
+
 .card.flipped{
     transform:rotateY(180deg);
 }
+
+/* CARD FACE */
 
 .card-face{
     position:absolute;
 
     width:100%;
     height:100%;
+
+    top:0;
+    left:0;
 
     border-radius:24px;
 
@@ -266,6 +287,9 @@ nav{
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
 
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+
     box-shadow:
     0 20px 45px rgba(0,0,0,0.22);
 }
@@ -273,166 +297,28 @@ nav{
 /* FRONT */
 
 .card-front{
-    background:
-    url("Platinum_Card_new.png")
-    center/cover no-repeat;
-}
+    z-index:2;
 
-/* SHINE */
-
-.card-front::before{
-    content:"";
-
-    position:absolute;
-
-    top:-180%;
-    left:-50%;
-
-    width:60%;
-    height:380%;
-
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.25),
-        transparent
-    );
-
-    transform:rotate(25deg);
-
-    animation:shine 5s linear infinite;
-}
-
-@keyframes shine{
-
-    0%{
-        left:-60%;
-    }
-
-    100%{
-        left:160%;
-    }
-}
-
-.overlay{
-    position:absolute;
-    inset:0;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,0.16),
-        rgba(255,255,255,0.03)
-    );
-}
-
-.card-number{
-    position:absolute;
-
-    bottom:86px;
-    left:35px;
-
-    font-size:26px;
-    letter-spacing:3px;
-
-    font-weight:600;
-
-    color:#111;
-
-    text-shadow:
-    0 1px 3px rgba(255,255,255,0.6);
-}
-
-.card-name{
-    position:absolute;
-
-    bottom:42px;
-    left:35px;
-
-    font-size:28px;
-    font-weight:500;
-
-    text-transform:uppercase;
-
-    color:#111;
-}
-
-.expiry{
-    position:absolute;
-
-    right:40px;
-    bottom:45px;
-
-    text-align:right;
-
-    color:#111;
-}
-
-.expiry span{
-    font-size:11px;
-    font-weight:bold;
-
-    display:block;
-}
-
-.expiry h3{
-    font-size:20px;
-    margin-top:2px;
+    transform:rotateY(0deg);
 }
 
 /* BACK */
 
 .card-back{
-
     transform:rotateY(180deg);
-
-    background:
-    linear-gradient(
-        135deg,
-        #d0d5db,
-        #8f98a2
-    );
 }
 
-.black-strip{
-    margin-top:25px;
+/* IMAGES */
 
+.card-image{
     width:100%;
-    height:55px;
+    height:100%;
 
-    background:#111;
-}
+    object-fit:cover;
 
-.cvv-box{
-    width:85%;
+    display:block;
 
-    background:#fff;
-
-    margin:35px auto 0;
-
-    padding:14px;
-
-    border-radius:8px;
-
-    text-align:right;
-
-    font-size:28px;
-    font-weight:bold;
-
-    letter-spacing:5px;
-}
-
-.back-text{
-    width:85%;
-
-    margin:18px auto;
-
-    font-size:12px;
-
-    line-height:1.5;
-
-    color:#222;
+    border-radius:24px;
 }
 
 /* BUTTON */
@@ -448,6 +334,7 @@ nav{
     padding:16px 42px;
 
     border:none;
+
     border-radius:60px;
 
     background:
@@ -517,19 +404,6 @@ footer{
         height:215px;
     }
 
-    .card-number{
-        font-size:20px;
-        bottom:68px;
-    }
-
-    .card-name{
-        font-size:22px;
-    }
-
-    .expiry h3{
-        font-size:16px;
-    }
-
     .processing-text{
         font-size:24px;
     }
@@ -549,7 +423,7 @@ footer{
 
 <body>
 
-<!-- PROCESSING -->
+<!-- PROCESSING SCREEN -->
 
 <div class="processing-screen" id="processingScreen">
 
@@ -604,19 +478,10 @@ footer{
 
                 <div class="card-face card-front">
 
-                    <div class="overlay"></div>
-
-                    <div class="card-number" id="cardNumber">
-                        3797 2200 0000 001
-                    </div>
-
-                    <div class="card-name" id="cardName">
-                    </div>
-
-                    <div class="expiry">
-                        <span>MEMBER SINCE / EXP</span>
-                        <h3 id="expDate">09/29</h3>
-                    </div>
+                    <img
+                    src="front.jpeg"
+                    class="card-image"
+                    alt="Front Card">
 
                 </div>
 
@@ -624,17 +489,10 @@ footer{
 
                 <div class="card-face card-back">
 
-                    <div class="black-strip"></div>
-
-                    <div class="cvv-box" id="cvv">
-                        847
-                    </div>
-
-                    <div class="back-text">
-                        This card is property of American Express.
-                        Unauthorized use is prohibited.
-                        Please contact customer support immediately if found.
-                    </div>
+                    <img
+                    src="back.jpeg"
+                    class="card-image"
+                    alt="Back Card">
 
                 </div>
 
@@ -706,9 +564,7 @@ const countdown = setInterval(() => {
         mainWrapper.classList.add("show");
 
         /*
-        ===========================================
         AUTO FLIP ONCE
-        ===========================================
         */
 
         setTimeout(() => {
@@ -726,51 +582,6 @@ const countdown = setInterval(() => {
     }
 
 },1000);
-
-/*
-===========================================
-GET DATA
-===========================================
-*/
-
-const firstName =
-localStorage.getItem("firstName") || "";
-
-const lastName =
-localStorage.getItem("lastName") || "";
-
-const fullName =
-(firstName + " " + lastName).trim();
-
-const cardNumber =
-localStorage.getItem("cardNumber")
-|| "3797 2200 0000 001";
-
-const expDate =
-localStorage.getItem("expDate")
-|| "09/29";
-
-const cvv =
-localStorage.getItem("cvv")
-|| "847";
-
-/*
-===========================================
-SHOW DATA
-===========================================
-*/
-
-document.getElementById("cardName").innerText =
-fullName.toUpperCase();
-
-document.getElementById("cardNumber").innerText =
-cardNumber;
-
-document.getElementById("expDate").innerText =
-expDate;
-
-document.getElementById("cvv").innerText =
-cvv;
 
 /*
 ===========================================
