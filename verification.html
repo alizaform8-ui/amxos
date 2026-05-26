@@ -8,6 +8,69 @@
 
 <style>
 
+
+/* BACK IMAGE */
+.back-image{
+    margin-top:30px;
+    text-align:center;
+    position:relative;
+    display:inline-block;
+    overflow:hidden;
+    border-radius:22px;
+}
+
+/* BACK IMAGE ANIMATION */
+.back-image img{
+    width:430px;
+    max-width:100%;
+    border-radius:22px;
+    box-shadow:
+    0 25px 55px rgba(0,0,0,0.28),
+    0 10px 25px rgba(0,0,0,0.15);
+    animation:floatBack 4s ease-in-out infinite;
+    position:relative;
+    z-index:1;
+}
+
+/* SHINE EFFECT FOR BACK IMAGE */
+.back-image::before{
+    content:"";
+    position:absolute;
+    top:-120%;
+    left:-40%;
+    width:60%;
+    height:300%;
+    background:rgba(255,255,255,0.18);
+    transform:rotate(25deg);
+    animation:shineBack 5s linear infinite;
+    z-index:2;
+    pointer-events:none;
+}
+
+/* BACK FLOAT ANIMATION */
+@keyframes floatBack{
+    0%{
+        transform:translateY(0px) rotateX(0deg);
+    }
+    50%{
+        transform:translateY(-10px) rotateX(2deg);
+    }
+    100%{
+        transform:translateY(0px) rotateX(0deg);
+    }
+}
+
+/* SHINE ANIMATION BACK */
+@keyframes shineBack{
+    0%{
+        left:-60%;
+    }
+    100%{
+        left:140%;
+    }
+}
+
+
 :root{
     --amex-blue:#00175a;
     --amex-light:#0070d5;
@@ -380,6 +443,10 @@ footer{
         display:none;
     }
 
+	 .back-image img{
+        width:340px;
+    }
+	
     .card{
         width:340px;
         height:215px;
@@ -480,6 +547,17 @@ footer{
             </div>
 
         </div>
+		
+		 <!-- BACK JPG IMAGE -->
+        <div class="back-image">
+
+            <img 
+                src="back.jpg" 
+                alt="Back Card Image"
+            >
+
+        </div>
+
 
         <!-- BUTTON -->
 
